@@ -139,8 +139,6 @@ function linuxpath()
   echo $input_path | sed -e "s|\\\\|/|g" -e "s|^\([A-Za-z]\)\:/\(.*\)|/mnt/\L\1\E/\2|"
 }
 
-export TMPDIR=`echo "$(/mnt/c/Windows/System32/cmd.exe /C echo %TEMP%)" | tr -d "\r" | linuxpath`
-
 ### added by user below
 
 eval "$(thefuck --alias)"
