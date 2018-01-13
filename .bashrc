@@ -141,9 +141,10 @@ function linuxpath()
 
 ### added by user below
 
-eval "$(thefuck --alias)"
-
 export PATH=$PATH:$HOME/usr/bin
+
+command -v thefuck >/dev/null 2>&1 && \
+    eval "$(thefuck --alias)"
 
 # use ssh-agent
 if [ -z "$SSH_AUTH_SOCK" ]; then
