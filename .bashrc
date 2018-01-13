@@ -152,12 +152,3 @@ if [ -z "$SSH_AUTH_SOCK" ]; then
     eval `ssh-agent -s`
     ssh-add
 fi
-#eval $(/mnt/c/weasel-pageant-1.0/weasel-pageant -r -a "/tmp/.weasell-pagent-$USER")
-#SSH_AGENT_FILE=$HOME/.ssh-agent
-#test -f $SSH_AGENT_FILE && source $SSH_AGENT_FILE
-#if ! ssh-add -l > /dev/null 2>&1; then
-#  ssh-agent > $SSH_AGENT_FILE
-#  source $SSH_AGENT_FILE
-#  ssh-add $HOME/.ssh/id_rsa
-#fi
-
