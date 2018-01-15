@@ -3,6 +3,7 @@ filetype off
 set encoding=utf-8
 set fileencoding=utf-8          " for writing
 set fileencodings=utf-8,cp932   " for reading
+set ambiwidth=double
 
 set wrap
 
