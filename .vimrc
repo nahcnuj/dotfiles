@@ -22,7 +22,7 @@ set ruler
 set number
 
 set list
-set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
+set listchars=tab:»-,trail:-,eol:￬,extends:»,precedes:«,nbsp:%
 
 set wildmenu
 set showcmd
