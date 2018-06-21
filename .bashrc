@@ -140,7 +140,6 @@ function linuxpath()
 }
 
 ### added by user below
-
 export PATH=$PATH:$HOME/usr/bin
 
 command -v thefuck >/dev/null 2>&1 && \
@@ -157,4 +156,5 @@ if [ ! -f $HOME/.git-prompt.sh ]; then
     chmod u+x $HOME/.git-prompt.sh
 fi
 source $HOME/.git-prompt.sh
-export PS1='\[\e[1;33m\]$(tput sc; printf "%*s" $COLUMNS "$(__git_ps1)"; tput rc)\[\e[m\]\[\e[1;32m\]\u@\h \[\e[1;34m\]\w\[\e[m\]\n$ '
+
+export PS1='\[\e[1;32m\]\u@\h\[\e[1;33m\]$(__git_ps1) \[\e[1;34m\]\w \[\e[m\]\n\$ '
