@@ -151,3 +151,10 @@ if [ -z "$SSH_AUTH_SOCK" ]; then
     eval `ssh-agent -s`
     ssh-add
 fi
+
+if [ ! -f $HOME/.git-prompt.sh ]; then
+    wget -O $HOME/.git-prompt.sh https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
+    chmod u+x $HOME/.git-prompt.sh
+fi
+source $HOME/.git-prompt.sh
+export PS1='\[\e[1;33m\]$(tput sc; printf "%*s" $COLUMNS "$(__git_ps1)"; tput rc)\[\e[m\]\[\e[1;32m\]\u@\h \[\e[1;34m\]\w\[\e[m\]\n$ '
