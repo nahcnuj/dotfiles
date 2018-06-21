@@ -8,14 +8,14 @@ DOTFILES   := $(filter-out $(EXCLUSIONS), $(CANDIDATES))
 deploy: ## Create symlink to home directory
 	@$(foreach val, $(DOTFILES), ln -sfnv $(abspath $(val)) $(HOME)/$(val);)
 
-init: ## Setup environment settings
-	@#DOTPATH=$(DOTPATH) bash $(DOTPATH)/etc/init/init.sh
+#init: ## Setup environment settings
+	#@DOTPATH=$(DOTPATH) bash $(DOTPATH)/etc/init/init.sh
 
-update: ## Fetch changes
+update: ## Fetch and apply changes
 	git pull origin master
+	@exec $$SHELL
 
 install: update deploy init ## Run make update, deploy, init
-	@exec $$SHELL
 
 help: ## Self-documented Makefile
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) \
