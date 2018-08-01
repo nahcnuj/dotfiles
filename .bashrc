@@ -140,7 +140,10 @@ function linuxpath()
 }
 
 ### added by user below
-export PATH=$PATH:$HOME/usr/bin
+export PATH=$PATH:$HOME/usr/bin:$HOME/.anyenv/bin
+
+# for anyenv
+eval "$(anyenv init -)"
 
 command -v thefuck >/dev/null 2>&1 && \
     eval "$(thefuck --alias)"
