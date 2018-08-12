@@ -149,7 +149,7 @@ command -v thefuck >/dev/null 2>&1 && \
     eval "$(thefuck --alias)"
 
 # use ssh-agent
-if [ -z "$SSH_AUTH_SOCK" ]; then
+if [ $(ps ax | grep [s]sh-agent | wc -l) = 0 ]; then
     eval `ssh-agent -s`
     ssh-add
 fi
