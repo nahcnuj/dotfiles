@@ -148,11 +148,15 @@ eval "$(anyenv init -)"
 command -v thefuck >/dev/null 2>&1 && \
     eval "$(thefuck --alias)"
 
-# use ssh-agent
-if [ $(ps ax | grep [s]sh-agent | wc -l) = 0 ]; then
-    eval `ssh-agent -s`
-    ssh-add
+if [[ `uname -a` =~ Microsoft ]]; then
+  eval $(/mnt/c/Users/nahcnuj/weasel-pageant-1.1/weasel-pageant -r)
+else
+  # use ssh-agent
+  if [ $(ps ax | grep [s]sh-agent | wc -l) = 0 ]; then
+    eval $(ssh-agent -s)
+  fi
 fi
+ssh-add -l
 
 if [ ! -f $HOME/.git-prompt.sh ]; then
     wget -O $HOME/.git-prompt.sh https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
