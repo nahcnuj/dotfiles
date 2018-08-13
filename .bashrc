@@ -164,4 +164,5 @@ if [ ! -f $HOME/.git-prompt.sh ]; then
 fi
 source $HOME/.git-prompt.sh
 
+export DISPLAY=:0
 export PS1='\[\e[1;32m\]\u@\h\[\e[1;33m\]$(__git_ps1) \[\e[1;34m\]\w \[\e[m\]\n\$ '
