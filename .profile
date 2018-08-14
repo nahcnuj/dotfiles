@@ -25,4 +25,6 @@ export XMODIFIERS="@im=fcitx"
 export DefaultIMModule=fcitx
 xset -r 49
 
+fcitx-autostart
+
 umask 022
