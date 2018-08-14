@@ -5,8 +5,8 @@ DOTFILES   := $(filter-out $(EXCLUSIONS), $(CANDIDATES))
 
 .DEFAULT_GOAL := help
 
-deploy: ## Create symlink to home directory
-	@$(foreach val, $(DOTFILES), ln -sfnv $(abspath $(val)) $(HOME)/$(val);)
+deploy: ## Copy files to home directory
+	@$(foreach val, $(DOTFILES), cp -r $(abspath $(val)) $(HOME)/$(val);)
 
 #init: ## Setup environment settings
 	#@DOTPATH=$(DOTPATH) bash $(DOTPATH)/etc/init/init.sh
