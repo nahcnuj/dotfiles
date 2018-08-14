@@ -1,0 +1,6 @@
+{
+    "code-runner.runInTerminal": true,
+    "editor.fontFamily": "'Fira Code', 'NasuM', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+    "editor.fontSize": 16,
+    "editor.fontLigatures": true,
+}
