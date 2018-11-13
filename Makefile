@@ -12,7 +12,7 @@ deploy: ## Create symlink to home directory
 	#@DOTPATH=$(DOTPATH) bash $(DOTPATH)/etc/init/init.sh
 
 update: ## Fetch and apply changes
-	git pull origin master
+	git pull
 	@exec $$SHELL
 
 install: update deploy init ## Run make update, deploy, init

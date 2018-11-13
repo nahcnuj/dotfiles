@@ -43,7 +43,7 @@ esac
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
 # should be on the output of commands, not on the prompt
-#force_color_prompt=yes
+force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
@@ -115,29 +115,6 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-
-export PATH=$PATH:/mnt/c/Program\ Files/Notepad++/
-
-function winpath()
-{
-  if [ -p /dev/stdin ]; then
-    input_path=$(cat -)
-  else
-    input_path=$(echo $@)
-  fi
-  /bin/readlink -f $input_path | sed -e "s|^\(/mnt/\([a-z]\)\)\(.*\)|\U\2:\E\3|" -e "s|/|\\\\|g"
-}
-
-function linuxpath()
-{
-  if [ -p /dev/stdin ]; then
-    input_path=$(cat -)
-  else
-    input_path=$(echo $@)
-  fi
-
-  echo $input_path | sed -e "s|\\\\|/|g" -e "s|^\([A-Za-z]\)\:/\(.*\)|/mnt/\L\1\E/\2|"
-}
 
 ### added by user below
 export PATH=$PATH:$HOME/usr/bin:$HOME/.anyenv/bin
