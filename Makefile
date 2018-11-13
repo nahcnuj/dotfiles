@@ -13,6 +13,9 @@ init: ## Setup environment settings
 
 update: ## Fetch and apply changes
 	git pull
+	git submodule init
+	git submodule update
+	git submodule foreach git pull origin master
 
 install: update deploy init ## Run make update, deploy, init
 	@exec $$SHELL -l
