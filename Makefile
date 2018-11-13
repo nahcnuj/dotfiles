@@ -1,6 +1,6 @@
 DOTPATH    := $(realpath $(dir $(lastword $(MAKEFILE_LIST))))
-CANDIDATES := $(wildcard .??*) bin
-EXCLUSIONS := .git
+CANDIDATES := $(wildcard .??*)
+EXCLUSIONS := .git .gitignore
 DOTFILES   := $(filter-out $(EXCLUSIONS), $(CANDIDATES))
 
 .DEFAULT_GOAL := help
@@ -8,14 +8,14 @@ DOTFILES   := $(filter-out $(EXCLUSIONS), $(CANDIDATES))
 deploy: ## Create symlink to home directory
 	@$(foreach val, $(DOTFILES), ln -sfnv $(abspath $(val)) $(HOME)/$(val);)
 
-#init: ## Setup environment settings
-	#@DOTPATH=$(DOTPATH) bash $(DOTPATH)/etc/init/init.sh
+init: ## Setup environment settings
+	@DOTPATH=$(DOTPATH) bash $(DOTPATH)/etc/init/init.sh
 
 update: ## Fetch and apply changes
 	git pull
-	@exec $$SHELL
 
 install: update deploy init ## Run make update, deploy, init
+	@exec $$SHELL -l
 
 help: ## Self-documented Makefile
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) \

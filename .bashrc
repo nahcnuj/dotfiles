@@ -122,9 +122,6 @@ export PATH=$PATH:$HOME/usr/bin:$HOME/.anyenv/bin
 # for anyenv
 eval "$(anyenv init -)"
 
-command -v thefuck >/dev/null 2>&1 && \
-    eval "$(thefuck --alias)"
-
 # use ssh-agent
 if [ -z "$SSH_AUTH_SOCK" ]; then
     eval `ssh-agent -s`
@@ -138,3 +135,5 @@ fi
 source $HOME/.git-prompt.sh
 
 export PS1='\[\e[1;32m\]\u@\h\[\e[1;33m\]$(__git_ps1) \[\e[1;34m\]\w \[\e[m\]\n\$ '
+
+export PROMPT_COMMAND='history -a;history -r;'
