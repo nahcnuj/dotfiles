@@ -116,6 +116,27 @@ if ! shopt -oq posix; then
   fi
 fi
 
+function winpath()
+{
+  if [ -p /dev/stdin ]; then
+    input_path=$(cat -)
+  else
+    input_path=$(echo $@)
+  fi
+  /bin/readlink -f $input_path | sed -e "s|^\(/mnt/\([a-z]\)\)\(.*\)|\U\2:\E\3|" -e "s|/|\\\\|g"
+}
+
+function linuxpath()
+{
+  if [ -p /dev/stdin ]; then
+    input_path=$(cat -)
+  else
+    input_path=$(echo $@)
+  fi
+
+  echo $input_path | sed -e "s|\\\\|/|g" -e "s|^\([A-Za-z]\)\:/\(.*\)|/mnt/\L\1\E/\2|"
+}
+
 ### added by user below
 export PATH=$PATH:$HOME/local/bin:$HOME/.anyenv/bin
 
