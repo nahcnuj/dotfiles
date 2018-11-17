@@ -29,6 +29,9 @@ set showcmd
 
 set writebackup
 
+set mouse=a
+set ttymouse=xterm2
+
 syntax on
 colorscheme desert
 
