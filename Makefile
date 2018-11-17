@@ -18,7 +18,7 @@ update: ## Fetch and apply changes
 	git submodule foreach git pull origin master
 
 install: update deploy init ## Run make update, deploy, init
-	@exec $$SHELL -l
+	@exec $$SHELL
 
 help: ## Self-documented Makefile
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) \
