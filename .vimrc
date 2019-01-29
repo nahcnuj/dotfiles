@@ -27,6 +27,8 @@ set listchars=tab:»-,trail:-,eol:￬,extends:»,precedes:«,nbsp:%
 set wildmenu
 set showcmd
 
+set clipboard=unnamed,autoselect
+
 set writebackup
 
 set mouse=a
