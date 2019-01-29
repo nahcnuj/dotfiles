@@ -151,6 +151,12 @@ if [ -z "$SSH_AUTH_SOCK" ]; then
     ssh-add
 fi
 
+if [ ! -f $HOME/.git-completion.bash ]; then
+    wget -O $HOME/.git-completion.bash https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
+    chmod u+x $HOME/.git-completion.bash
+fi
+source $HOME/.git-completion.bash
+
 if [ ! -f $HOME/.git-prompt.sh ]; then
     wget -O $HOME/.git-prompt.sh https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
     chmod u+x $HOME/.git-prompt.sh
