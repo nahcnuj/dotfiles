@@ -146,9 +146,11 @@ export PATH=$PATH:$HOME/usr/share/perl6/site/bin:$HOME/usr/bin:$HOME/local/bin:$
 eval "$(anyenv init -)"
 
 # use ssh-agent
-if [ -z "$SSH_AUTH_SOCK" ]; then
+if [ $(ps ax | grep [s]sh-agent | wc -l) -gt 0 ]; then
     eval `ssh-agent -s`
     ssh-add
+
+    trap 'ssh-agent -k' exit
 fi
 
 if [ ! -f $HOME/.git-completion.bash ]; then
