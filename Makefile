@@ -1,11 +1,12 @@
 DOTPATH    := $(realpath $(dir $(lastword $(MAKEFILE_LIST))))
-CANDIDATES := $(wildcard .??*)
+CANDIDATES := $(wildcard .??*) bin etc
 EXCLUSIONS := .git .gitignore .gitmodules
 DOTFILES   := $(filter-out $(EXCLUSIONS), $(CANDIDATES))
 
 .DEFAULT_GOAL := help
 
 deploy: ## Create symlink to home directory
+	@echo $(DOTFILES)
 	@$(foreach val, $(DOTFILES), ln -sfnv $(abspath $(val)) $(HOME)/$(val);)
 
 init: ## Setup environment settings
