@@ -43,7 +43,7 @@ esac
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
 # should be on the output of commands, not on the prompt
-#force_color_prompt=yes
+force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
@@ -109,14 +109,14 @@ fi
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
 if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
+  if [[ $PS1 && -f $HOME/usr/share/bash-completion/bash_completion ]]; then
+    . $HOME/usr/share/bash-completion/bash_completion
+  elif [ -f /usr/share/bash-completion/bash_completion ]; then
     . /usr/share/bash-completion/bash_completion
   elif [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
   fi
 fi
-
-export PATH=$PATH:/mnt/c/Program\ Files/Notepad++/
 
 function winpath()
 {
@@ -140,23 +140,24 @@ function linuxpath()
 }
 
 ### added by user below
-export PATH=$PATH:$HOME/usr/bin:$HOME/.anyenv/bin
+export PATH=$PATH:$HOME/usr/share/perl6/site/bin:$HOME/usr/bin:$HOME/local/bin:$HOME/.anyenv/bin
 
 # for anyenv
 eval "$(anyenv init -)"
 
-command -v thefuck >/dev/null 2>&1 && \
-    eval "$(thefuck --alias)"
+# use ssh-agent
+if [ $(ps ax | grep [s]sh-agent | wc -l) -gt 0 ]; then
+    eval `ssh-agent -s`
+    ssh-add
 
-if [[ `uname -a` =~ Microsoft ]]; then
-  eval $(/mnt/c/Users/nahcnuj/weasel-pageant-1.1/weasel-pageant -r)
-else
-  # use ssh-agent
-  if [ $(ps ax | grep [s]sh-agent | wc -l) = 0 ]; then
-    eval $(ssh-agent -s)
-  fi
+    trap 'ssh-agent -k' exit
 fi
-ssh-add -l
+
+if [ ! -f $HOME/.git-completion.bash ]; then
+    wget -O $HOME/.git-completion.bash https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
+    chmod u+x $HOME/.git-completion.bash
+fi
+source $HOME/.git-completion.bash
 
 if [ ! -f $HOME/.git-prompt.sh ]; then
     wget -O $HOME/.git-prompt.sh https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh
@@ -164,9 +165,6 @@ if [ ! -f $HOME/.git-prompt.sh ]; then
 fi
 source $HOME/.git-prompt.sh
 
-export DISPLAY=:0
-export LIBGL_ALWAYS_INDIRECT=1
 export PS1='\[\e[1;32m\]\u@\h\[\e[1;33m\]$(__git_ps1) \[\e[1;34m\]\w \[\e[m\]\n\$ '
 
-# for VSCode
-export LD_LIBRARY_PATH=$HOME/lib
+export PROMPT_COMMAND='history -a;history -r;'

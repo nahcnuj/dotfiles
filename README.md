@@ -6,6 +6,9 @@ This is my dotfiles.
 git clone https://github.com/nahcnuj/dotfiles.git
 cd dotfiles
 make install
+
+# for Windows Subsystem for Linux
+sudo ln -sfnv $HOME/etc/wsl.conf /etc/wsl.conf
 ```
 
 ## References
