@@ -168,3 +168,26 @@ source $HOME/.git-prompt.sh
 export PS1='\[\e[1;32m\]\u@\h\[\e[1;33m\]$(__git_ps1) \[\e[1;34m\]\w \[\e[m\]\n\$ '
 
 export PROMPT_COMMAND='history -a;history -r;'
+
+exit() {
+    if [[ -z $TMUX ]]; then
+        builtin exit
+    else
+        tmux detach
+    fi
+}
+
+if [[ ! -n $TMUX ]]; then
+    IDs="`tmux list-sessions`"
+    [[ -z "$IDs" ]] && tmux new-session
+    create_new_session="Create New Session"
+    IDs="$IDs\n${create_new_session}"
+    ID="`echo -e $IDs | peco | cut -d: -f1`"
+    if [[ "$ID" = "${create_new_session}" ]]; then
+        tmux new-session
+    elif [[ -n "$ID" ]]; then
+        tmux attach-session -t "$ID"
+    else
+        :   # Start terminal normally
+    fi
+fi
