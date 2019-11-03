@@ -140,7 +140,7 @@ function linuxpath()
 }
 
 ### added by user below
-export PATH=$PATH:$HOME/usr/share/perl6/site/bin:$HOME/usr/bin:$HOME/local/bin:$HOME/.anyenv/bin
+export PATH=$PATH:$HOME/usr/bin:$HOME/local/bin:$HOME/.anyenv/bin
 
 # for anyenv
 eval "$(anyenv init -)"
