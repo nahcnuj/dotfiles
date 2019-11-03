@@ -143,7 +143,7 @@ function linuxpath()
 export PATH=$PATH:$HOME/usr/bin:$HOME/local/bin:$HOME/.anyenv/bin
 
 # for anyenv
-eval "$(anyenv init -)"
+command -v anyenv >/dev/null 2>&1 && eval "$(anyenv init -)"
 
 # use ssh-agent
 if [ $(ps ax | grep [s]sh-agent | wc -l) -gt 0 ]; then
