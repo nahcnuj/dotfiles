@@ -145,12 +145,13 @@ export PATH=$PATH:$HOME/usr/bin:$HOME/local/bin:$HOME/.anyenv/bin
 # for anyenv
 command -v anyenv >/dev/null 2>&1 && eval "$(anyenv init -)"
 
-# use ssh-agent
-if [ $(ps ax | grep [s]sh-agent | wc -l) -gt 0 ]; then
-    eval `ssh-agent -s`
-    ssh-add
-
-    trap 'ssh-agent -k' exit
+# ssh-agent (avoid running duplicate process)
+SSH_AGENT_FILE=$HOME/.ssh-agent
+test -f $SSH_AGENT_FILE && source $SSH_AGENT_FILE
+if ! ssh-add -l >/dev/null 2>&1; then
+    ssh-agent >$SSH_AGENT_FILE
+    source $SSH_AGENT_FILE
+    ssh-add $HOME/.ssh/id_rsa
 fi
 
 if [ ! -f $HOME/.git-completion.bash ]; then
