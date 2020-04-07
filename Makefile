@@ -10,7 +10,7 @@ DOTFILES   := $(filter-out $(EXCLUSIONS), $(CANDIDATES))
 deploy: ## Create symlinks to dotfiles into home directory
 	@echo $(DOTFILES) \
 		| tr ' ' "\n" \
-		| xargs -n 1 -i ln -sfnv $(DOTPATH)/{} $(HOME)/{}
+		| xargs -n 1 -I {} ln -sfnv $(DOTPATH)/{} $(HOME)/{}
 
 init: ## 
 	@#@DOTPATH=$(DOTPATH) bash $(DOTPATH)/etc/init/init.sh
