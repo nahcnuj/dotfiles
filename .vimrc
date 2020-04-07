@@ -37,4 +37,8 @@ set ttymouse=xterm2
 syntax on
 colorscheme desert
 
+" Markdown
+set syntax=markdown
+au BufRead,BufNewFile *.md set filetype=markdown
+
 filetype plugin indent on
