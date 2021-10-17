@@ -145,6 +145,10 @@ export PATH=$PATH:$HOME/usr/bin:$HOME/local/bin:$HOME/.anyenv/bin
 # for anyenv
 command -v anyenv >/dev/null 2>&1 && eval "$(anyenv init -)"
 
+# Golang
+export GOPATH="$HOME/go"
+export PATH=$PATH:$GOPATH/bin:/usr/local/go/bin
+
 # ssh-agent (avoid running duplicate process)
 SSH_AGENT_FILE=$HOME/.ssh-agent
 test -f $SSH_AGENT_FILE && source $SSH_AGENT_FILE
