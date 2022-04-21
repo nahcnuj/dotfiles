@@ -210,3 +210,5 @@ PATH=$_path
 
 unset _p
 unset _path
+
+command -v golangci-lint >/dev/null && source <(golangci-lint completion bash) || true
