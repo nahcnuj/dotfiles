@@ -140,14 +140,6 @@ function linuxpath()
 }
 
 ### added by user below
-export PATH=$PATH:$HOME/usr/bin:$HOME/local/bin:$HOME/.anyenv/bin
-
-# for anyenv
-command -v anyenv >/dev/null 2>&1 && eval "$(anyenv init -)"
-
-# Golang
-export GOPATH="$HOME/go"
-export PATH=$PATH:$GOPATH/bin:/usr/local/go/bin
 
 # ssh-agent (avoid running duplicate process)
 SSH_AGENT_FILE=$HOME/.ssh-agent
@@ -198,3 +190,23 @@ if [[ ! -n $TMUX ]]; then
 fi
 
 export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
+
+# make PATH unique  https://qiita.com/key-amb/items/ce39b0c85b30888e1e3b
+_path=""
+for _p in $(echo $PATH | tr ':' ' '); do
+  case ":${_path}:" in
+    *:"${_p}":* )
+      ;;
+    * )
+      if [ "$_path" ]; then
+        _path="$_path:$_p"
+      else
+        _path=$_p
+      fi
+      ;;
+  esac
+done
+PATH=$_path
+
+unset _p
+unset _path
