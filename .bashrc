@@ -196,3 +196,5 @@ if [[ ! -n $TMUX ]]; then
         :   # Start terminal normally
     fi
 fi
+
+export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
