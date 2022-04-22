@@ -214,3 +214,7 @@ unset _p
 unset _path
 
 command -v golangci-lint >/dev/null && source <(golangci-lint completion bash) || true
+
+if command -v trans >/dev/null ; then
+    alias trans-en="trans -b en:ja"
+fi
