@@ -174,7 +174,7 @@ exit() {
     fi
 }
 
-if [[ ! -n $TMUX ]]; then
+if [[ ! -n $TMUX ]] && command -v peco >/dev/null ; then
     IDs="`tmux list-sessions`"
     [[ -z "$IDs" ]] && tmux new-session
     not_attach_session=
