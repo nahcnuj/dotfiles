@@ -196,17 +196,17 @@ export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
 # make PATH unique  https://qiita.com/key-amb/items/ce39b0c85b30888e1e3b
 _path=""
 for _p in $(echo $PATH | tr ':' ' '); do
-  case ":${_path}:" in
-    *:"${_p}":* )
-      ;;
-    * )
-      if [ "$_path" ]; then
-        _path="$_path:$_p"
-      else
-        _path=$_p
-      fi
-      ;;
-  esac
+    case ":${_path}:" in
+        *:"${_p}":* )
+            ;;
+        * )
+            if [ "$_path" ]; then
+              _path="$_path:$_p"
+            else
+              _path=$_p
+            fi
+            ;;
+    esac
 done
 PATH=$_path
 
