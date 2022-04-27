@@ -174,7 +174,8 @@ exit() {
     fi
 }
 
-if [[ ! -n $TMUX ]] && command -v peco >/dev/null ; then
+use_tmux="$TMUX""$VSCODE_PID""$TERM_PROGRAM"
+if [[ "$use_tmux" != "vscode" ]] && command -v peco >/dev/null ; then
     IDs=`tmux list-sessions`
     [[ -z "$IDs" ]] && tmux new-session
     not_attach_session=
