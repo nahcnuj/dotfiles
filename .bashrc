@@ -174,21 +174,22 @@ exit() {
     fi
 }
 
-use_tmux="$TMUX""$VSCODE_PID""$TERM_PROGRAM"
-if [[ "$use_tmux" != "vscode" ]] && command -v peco >/dev/null ; then
-    IDs=`tmux list-sessions`
-    [[ -z "$IDs" ]] && tmux new-session
-    not_attach_session=
-    create_new_session="Create a new session"
-    IDs="${not_attach_session}\n$IDs\n${create_new_session}"
-    ID="`echo -e "$IDs" | peco | cut -d: -f1`"
-    if [[ "$ID" = "${create_new_session}" ]]; then
-        tmux new-session
-    elif [[ -n "$ID" ]]; then
-        tmux attach-session -t "$ID"
-    else
-        # Start terminal without tmux
-        :
+if command -v peco >/dev/null ; then
+    if [[ -z "$TMUX" ]] && [[ -z "$VSCODE_PID" ]] && [[ "$TERM_PROGRAM" != "vscode" ]] ; then
+        IDs=`tmux list-sessions`
+        [[ -z "$IDs" ]] && tmux new-session
+        not_attach_session=
+        create_new_session="Create a new session"
+        IDs="${not_attach_session}\n$IDs\n${create_new_session}"
+        ID="`echo -e "$IDs" | peco | cut -d: -f1`"
+        if [[ "$ID" = "${create_new_session}" ]]; then
+            tmux new-session
+        elif [[ -n "$ID" ]]; then
+            tmux attach-session -t "$ID"
+        else
+            # Start terminal without tmux
+            :
+        fi
     fi
 fi
 
