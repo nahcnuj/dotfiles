@@ -144,10 +144,9 @@ function linuxpath()
 # ssh-agent (avoid running duplicate process)
 SSH_AGENT_FILE=$HOME/.ssh-agent
 test -f $SSH_AGENT_FILE && source $SSH_AGENT_FILE
-if ! ssh-add -l >/dev/null 2>&1; then
+if [ $(ps -ef | grep '[s]sh-agent' | wc -l ) -eq 0 ]; then
     ssh-agent >$SSH_AGENT_FILE
     source $SSH_AGENT_FILE
-    ssh-add $HOME/.ssh/id_rsa
 fi
 
 if [ ! -f $HOME/.git-completion.bash ]; then
