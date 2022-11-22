@@ -223,3 +223,21 @@ command -v golangci-lint >/dev/null && source <(golangci-lint completion bash) |
 if command -v trans >/dev/null ; then
     alias trans-en="trans -b en:ja"
 fi
+
+ghq-peco() {
+    if ! command -v peco >/dev/null ; then
+        echo '[ERROR] need to install peco' 1>&2
+        return 1
+    fi
+    if ! command -v ghq >/dev/null ; then
+        echo '[ERROR] need to install ghq' 1>&2
+        return 1
+    fi
+    local repo_path=`ghq list | peco`
+    if [ -z "${repo_path}" ]; then
+        # canceled
+        return
+    fi
+    cd "`ghq root`/${repo_path}"
+}
+alias gcd=ghq-peco
