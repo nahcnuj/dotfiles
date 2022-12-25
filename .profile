@@ -19,12 +19,14 @@ fi
 # set PATH so it includes user's private bin directories
 PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 
-export GTK_IM_MODULE=fcitx
-export QT_IM_MODULE=fcitx
-export XMODIFIERS="@im=fcitx"
-export DefaultIMModule=fcitx
-xset -r 49
+if command -v fcitx-autostart; then
+    export GTK_IM_MODULE=fcitx
+    export QT_IM_MODULE=fcitx
+    export XMODIFIERS="@im=fcitx"
+    export DefaultIMModule=fcitx
+    xset -r 49
 
-fcitx-autostart
+    fcitx-autostart
+fi
 
 umask 022
