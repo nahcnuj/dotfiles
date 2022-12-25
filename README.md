@@ -3,7 +3,7 @@ This is my dotfiles.
 
 ## Usage
 ```bash
-git clone https://github.com/nahcnuj/dotfiles.git
+git clone --recursive https://github.com/nahcnuj/dotfiles.git
 cd dotfiles
 make install
 

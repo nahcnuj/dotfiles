@@ -198,6 +198,9 @@ export GOROOT=/usr/local/go
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
+export PATH="$HOME/.anyenv/bin:$PATH"
+eval "$(anyenv init -)"
+
 # make PATH unique  https://qiita.com/key-amb/items/ce39b0c85b30888e1e3b
 _path=""
 for _p in $(echo $PATH | tr ':' ' '); do
