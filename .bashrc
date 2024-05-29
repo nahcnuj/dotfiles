@@ -141,6 +141,8 @@ function linuxpath()
 
 ### added by user below
 
+export GPG_TTY=$(tty)
+
 # ssh-agent (avoid running duplicate process)
 SSH_AGENT_FILE=$HOME/.ssh-agent
 test -f $SSH_AGENT_FILE && source $SSH_AGENT_FILE
