@@ -248,3 +248,5 @@ ghq-peco() {
     cd "`ghq root`/${repo_path}"
 }
 alias gcd=ghq-peco
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" || :
